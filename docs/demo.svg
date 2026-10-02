@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1086" height="480" viewBox="0 0 1086 480" role="img" aria-label="gitsecrets terminal demo">
+<style>text{font:14px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre}g.l{animation:s .01s backwards}@keyframes s{from{opacity:0}}</style>
+<rect width="1086" height="480" rx="10" fill="#0d1117"/>
+<circle cx="20" cy="18" r="6" fill="#ff5f56"/><circle cx="40" cy="18" r="6" fill="#ffbd2e"/><circle cx="60" cy="18" r="6" fill="#27c93f"/>
+<g class="l" style="animation-delay:0.40s"><text x="16" y="58" fill="#e6edf3">$ gitsecrets install-hook</text></g>
+<g class="l" style="animation-delay:1.30s"><text x="16" y="78" fill="#8b949e">Installed .git/hooks/pre-commit</text></g>
+<g class="l" style="animation-delay:1.42s"><text x="16" y="98" fill="#e6edf3">$ echo &#x27;AWS_KEY = &quot;AKIA...&quot;&#x27; &gt; cfg.py     # a fake AWS example key</text></g>
+<g class="l" style="animation-delay:2.32s"><text x="16" y="118" fill="#e6edf3">$ git add cfg.py &amp;&amp; git commit -m &#x27;add config&#x27;</text></g>
+<g class="l" style="animation-delay:3.22s"><text x="16" y="138" fill="#d29922">Commit blocked. Remove the secret, add `gitsecrets:ignore` to the line if it&#x27;s a false positive, or bypass with --no-verify.</text></g>
+<g class="l" style="animation-delay:3.34s"><text x="16" y="158" fill="#ff7b72">[aws-access-key-id] AWS Access Key ID</text></g>
+<g class="l" style="animation-delay:3.46s"><text x="16" y="178" fill="#8b949e">  file:   cfg.py:1</text></g>
+<g class="l" style="animation-delay:3.58s"><text x="16" y="198" fill="#8b949e">  secret: AKIA************  (entropy 3.68)</text></g>
+<g class="l" style="animation-delay:3.70s"><text x="16" y="218" fill="#8b949e"></text></g>
+<g class="l" style="animation-delay:3.82s"><text x="16" y="238" fill="#d29922">1 potential secret(s) found</text></g>
+<g class="l" style="animation-delay:3.94s"><text x="16" y="258" fill="#e6edf3">$ git commit --no-verify -m &#x27;add config&#x27;     # bypass the hook</text></g>
+<g class="l" style="animation-delay:4.84s"><text x="16" y="278" fill="#e6edf3">$ git commit -am &#x27;remove key&#x27;                # key deleted from the code</text></g>
+<g class="l" style="animation-delay:5.74s"><text x="16" y="298" fill="#e6edf3">$ gitsecrets tree                            # current files: clean</text></g>
+<g class="l" style="animation-delay:6.64s"><text x="16" y="318" fill="#8b949e">No secrets found.</text></g>
+<g class="l" style="animation-delay:6.76s"><text x="16" y="338" fill="#e6edf3">$ gitsecrets history                         # ...but still in git history</text></g>
+<g class="l" style="animation-delay:7.66s"><text x="16" y="358" fill="#ff7b72">[aws-access-key-id] AWS Access Key ID</text></g>
+<g class="l" style="animation-delay:7.78s"><text x="16" y="378" fill="#8b949e">  file:   cfg.py:1</text></g>
+<g class="l" style="animation-delay:7.90s"><text x="16" y="398" fill="#8b949e">  commit: 996e7c6b1d  demo  2026-10-01T23:39:44-04:00</text></g>
+<g class="l" style="animation-delay:8.02s"><text x="16" y="418" fill="#8b949e">  secret: AKIA************  (entropy 3.68)</text></g>
+<g class="l" style="animation-delay:8.14s"><text x="16" y="438" fill="#8b949e"></text></g>
+<g class="l" style="animation-delay:8.26s"><text x="16" y="458" fill="#d29922">1 potential secret(s) found</text></g>
+</svg>

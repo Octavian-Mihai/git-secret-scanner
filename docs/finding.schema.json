@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "gitsecrets --format json report (schema_version 1)",
+  "type": "object",
+  "required": ["schema_version", "tool_version", "suppressed_by_baseline", "findings"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "tool_version": { "type": "string" },
+    "suppressed_by_baseline": { "type": "integer", "minimum": 0 },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rule", "description", "path", "line", "secret", "entropy", "fingerprint"],
+        "properties": {
+          "rule": { "type": "string", "description": "Rule id; '+base64' suffix means the secret was base64-decoded" },
+          "description": { "type": "string" },
+          "path": { "type": "string" },
+          "line": { "type": "integer", "description": "Line in the file at that commit (history/staged) or on disk (tree)" },
+          "commit": { "type": ["string", "null"], "description": "Introducing commit (history only)" },
+          "author": { "type": ["string", "null"] },
+          "date": { "type": ["string", "null"] },
+          "secret": { "type": "string", "description": "Redacted unless --show-secrets" },
+          "entropy": { "type": "number" },
+          "fingerprint": { "type": "string", "description": "sha256(rule, path, secret)[:16]; stable across line moves and rebases" },
+          "verified": { "type": ["boolean", "null"], "description": "true=live, false=rejected, null=not checked/inconclusive" },
+          "verify_note": { "type": "string" }
+        }
+      }
+    }
+  }
+}
