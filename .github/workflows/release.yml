@@ -1,9 +1,9 @@
-# Publishes to PyPI when a version tag is pushed. Requires PyPI "trusted publishing"
-# to be configured for this repo (no API token is stored anywhere).
+# Publishes to PyPI via trusted publishing (no API token stored anywhere).
+# Manual until a PyPI trusted publisher is configured for this repo + the "pypi" environment;
+# afterwards, change the trigger to `push: tags: ["v*"]`.
 name: Release
 on:
-  push:
-    tags: ["v*"]
+  workflow_dispatch:
 
 jobs:
   publish:
