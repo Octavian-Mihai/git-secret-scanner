@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gitsecrets"
+version = "0.1.0"
+description = "Mini gitleaks: regex + entropy secret scanner for files, full git history, and a pre-commit hook"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+gitsecrets = "gitsecrets.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["gitsecrets*"]
