@@ -1,0 +1,127 @@
+# Built-in rules. Same schema as user rules in .gitsecrets.toml:
+#   id, description, regex      required
+#   group                       capture group holding the secret (default 0)
+#   keywords                    cheap lowercase substrings; the regex only runs on lines containing one
+#   min_entropy                 reject matches below this Shannon entropy (bits/char)
+#   allowlist                   regexes; a match on the secret suppresses the finding
+
+[[rules]]
+id = "aws-access-key-id"
+description = "AWS Access Key ID"
+regex = '''\b((?:AKIA|ASIA|ABIA|ACCA)[A-Z2-7]{16})\b'''
+group = 1
+keywords = ["akia", "asia", "abia", "acca"]
+
+[[rules]]
+id = "aws-secret-access-key"
+description = "AWS Secret Access Key"
+regex = '''(?i)aws.{0,20}?(?:secret|sk).{0,20}?['"=:\s]([A-Za-z0-9/+=]{40})\b'''
+group = 1
+keywords = ["aws"]
+
+[[rules]]
+id = "github-token"
+description = "GitHub Token"
+regex = '''\b(gh[pousr]_[A-Za-z0-9]{36,255})\b'''
+group = 1
+keywords = ["ghp_", "gho_", "ghu_", "ghs_", "ghr_"]
+
+[[rules]]
+id = "github-fine-grained-pat"
+description = "GitHub Fine-Grained PAT"
+regex = '''\b(github_pat_[A-Za-z0-9_]{22,255})\b'''
+group = 1
+keywords = ["github_pat_"]
+
+[[rules]]
+id = "gitlab-pat"
+description = "GitLab Personal Access Token"
+regex = '''\b(glpat-[A-Za-z0-9_\-]{20})\b'''
+group = 1
+keywords = ["glpat-"]
+
+[[rules]]
+id = "slack-token"
+description = "Slack Token"
+regex = '''\b(xox[abprs]-[A-Za-z0-9-]{10,72})\b'''
+group = 1
+keywords = ["xox"]
+
+[[rules]]
+id = "slack-webhook"
+description = "Slack Webhook URL"
+regex = '''(https://hooks\.slack\.com/services/T[A-Za-z0-9]+/B[A-Za-z0-9]+/[A-Za-z0-9]+)'''
+group = 1
+keywords = ["hooks.slack.com"]
+
+[[rules]]
+id = "stripe-key"
+description = "Stripe API Key"
+regex = '''\b((?:sk|rk)_(?:live|test)_[A-Za-z0-9]{16,99})\b'''
+group = 1
+keywords = ["sk_", "rk_"]
+
+[[rules]]
+id = "google-api-key"
+description = "Google API Key"
+regex = '''\b(AIza[0-9A-Za-z_\-]{35})\b'''
+group = 1
+keywords = ["aiza"]
+
+# Anthropic before OpenAI: both match `sk-ant-...`, and the first rule to claim a secret wins.
+[[rules]]
+id = "anthropic-key"
+description = "Anthropic API Key"
+regex = '''\b(sk-ant-[A-Za-z0-9_\-]{32,})\b'''
+group = 1
+keywords = ["sk-ant-"]
+
+[[rules]]
+id = "openai-key"
+description = "OpenAI API Key"
+regex = '''\b(sk-(?:proj-)?[A-Za-z0-9_\-]{32,})\b'''
+group = 1
+keywords = ["sk-"]
+
+[[rules]]
+id = "twilio-key"
+description = "Twilio API Key"
+regex = '''\b(SK[0-9a-fA-F]{32})\b'''
+group = 1
+keywords = ["sk"]
+
+[[rules]]
+id = "sendgrid-key"
+description = "SendGrid API Key"
+regex = '''\b(SG\.[A-Za-z0-9_\-]{22}\.[A-Za-z0-9_\-]{43})\b'''
+group = 1
+keywords = ["sg."]
+
+[[rules]]
+id = "npm-token"
+description = "npm Access Token"
+regex = '''\b(npm_[A-Za-z0-9]{36})\b'''
+group = 1
+keywords = ["npm_"]
+
+[[rules]]
+id = "private-key"
+description = "Private Key Block"
+regex = '''(-----BEGIN (?:RSA |EC |DSA |OPENSSH |PGP )?PRIVATE KEY(?: BLOCK)?-----)'''
+group = 1
+keywords = ["private key"]
+
+[[rules]]
+id = "jwt"
+description = "JSON Web Token"
+regex = '''\b(eyJ[A-Za-z0-9_\-]{8,}\.eyJ[A-Za-z0-9_\-]{8,}\.[A-Za-z0-9_\-]{8,})\b'''
+group = 1
+keywords = ["eyj"]
+
+[[rules]]
+id = "db-url-password"
+description = "Password in connection URL"
+regex = '''\b[a-z][a-z0-9+.\-]*://[^\s:/@]+:([^\s:/@]{6,})@[^\s/]+'''
+group = 1
+keywords = ["://"]
+allowlist = ['''(?i)example|changeme|placeholder|your[_-]|xxxx|dummy|sample|redacted|password|[<{$*]''', '''^(.)\1+$''']

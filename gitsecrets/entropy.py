@@ -1,4 +1,6 @@
 """Shannon entropy helpers."""
+from __future__ import annotations
+
 import math
 import re
 from collections import Counter
@@ -8,7 +10,7 @@ B64 = re.compile(r"^[A-Za-z0-9+/=_\-]+$")
 
 # Thresholds in bits/char; hex alphabets cap at 4.0 so need a lower bar.
 HEX_THRESHOLD = 3.0
-B64_THRESHOLD = 4.3
+B64_THRESHOLD = 4.2
 
 
 def shannon(s: str) -> float:

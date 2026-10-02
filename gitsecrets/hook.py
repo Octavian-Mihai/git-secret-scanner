@@ -1,4 +1,6 @@
 """Install/uninstall the pre-commit hook."""
+from __future__ import annotations
+
 import os
 import stat
 import subprocess
@@ -17,6 +19,9 @@ def _script() -> str:
     return f"""#!/bin/sh
 {MARKER}
 # Blocks the commit if staged changes contain secrets. Bypass: git commit --no-verify
+if command -v gitsecrets >/dev/null 2>&1; then
+    exec gitsecrets staged
+fi
 exec "{sys.executable}" -m gitsecrets staged
 """
 
