@@ -1,0 +1,8 @@
+- id: gitsecrets
+  name: gitsecrets
+  description: Block commits whose staged changes contain API keys or tokens
+  entry: gitsecrets staged
+  language: python
+  pass_filenames: false
+  always_run: true
+  stages: [pre-commit]

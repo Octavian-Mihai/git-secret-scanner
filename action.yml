@@ -1,0 +1,19 @@
+name: gitsecrets
+description: Scan the full git history for leaked API keys and tokens
+branding:
+  icon: shield
+  color: red
+inputs:
+  args:
+    description: Arguments passed to gitsecrets (checkout with fetch-depth 0 to scan full history)
+    default: history
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - run: python -m pip install "${{ github.action_path }}"
+      shell: bash
+    - run: gitsecrets ${{ inputs.args }}
+      shell: bash
