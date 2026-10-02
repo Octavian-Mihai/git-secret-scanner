@@ -36,6 +36,12 @@ class DetectorTests(unittest.TestCase):
     def test_ignore_marker(self):
         self.assertEqual(scan_line(f"{AWS}  # gitsecrets:ignore"), [])
 
+    def test_path_filter(self):
+        pf = PathFilter()
+        for p in ["node_modules/a/b.js", "web/node_modules/x.js", ".package-lock.json", "vendor/x.go"]:
+            self.assertTrue(pf.skip(p), p)
+        self.assertFalse(pf.skip("src/app.js"))
+
     def test_entropy_ordering(self):
         self.assertGreater(shannon(RANDOM), shannon("aaaaaaaabbbbbbbb"))
 

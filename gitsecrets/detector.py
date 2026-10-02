@@ -82,10 +82,11 @@ def scan_line(line: str, entropy: bool = True,
 
 class PathFilter:
     """Skips lockfiles, binaries and user-configured globs."""
-    DEFAULT = ["*.lock", "package-lock.json", "yarn.lock", "pnpm-lock.yaml",
+    DEFAULT = ["*.lock", "*package-lock.json", "yarn.lock", "pnpm-lock.yaml",
                "poetry.lock", "go.sum", "*.min.js", "*.min.css", "*.map",
                "*.png", "*.jpg", "*.jpeg", "*.gif", "*.ico", "*.pdf", "*.zip",
-               "*.gz", "*.woff", "*.woff2", "*.ttf", "*.pyc", ".gitsecretsignore"]
+               "*.gz", "*node_modules/*", "node_modules/*", "*vendor/*", "vendor/*",
+               "*.woff", "*.woff2", "*.ttf", "*.pyc", ".gitsecretsignore"]
 
     def __init__(self, extra: Iterable[str] = ()):
         self.patterns = self.DEFAULT + list(extra)
